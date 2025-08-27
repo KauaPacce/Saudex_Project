@@ -7,6 +7,7 @@ $usuarios = new clssaudex();
 //-- Recebendo dados do formulario
 $cod        = filter_input(INPUT_GET,"cod");
 $Nome       = filter_input(INPUT_GET,"Nome");
+$Senha      = filter_input(INPUT_GET,"Senha");
 $Email      = filter_input(INPUT_GET,"Email");
 $Telefone   = filter_input(INPUT_GET,"Telefone");
 $cep        = filter_input(INPUT_GET,"cep");
@@ -18,6 +19,7 @@ $genero     = filter_input(INPUT_GET,"genero");
 //-- Enviando para dentro da classe nos atributos
 $usuarios->setcod($cod);
 $usuarios->setNome($Nome);
+$usuarios->setSenha($Senha);
 $usuarios->setEmail($Email);
 $usuarios->setTelefone($Telefone);
 $usuarios->setcep($cep);

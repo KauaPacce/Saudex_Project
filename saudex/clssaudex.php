@@ -5,7 +5,7 @@ include_once 'conexao.php';
 class clssaudex
 {
     private $conn;
-	private $cod, $Nome, $Email, $Telefone, $cpf, $cep, $nasc, $genero;
+	private $cod, $Nome, $Email, $Senha, $Telefone, $cpf, $cep, $nasc, $genero;
 
     // -- contrutor conexao ---------------
     public function __construct() 
@@ -31,6 +31,11 @@ class clssaudex
         { $this->Email = $Em; }
     public function getEmail()
         { return $this->Email; }
+
+    public function setSenha($Se)
+        { $this->Senha = $Se; }
+    public function getSenha()
+        { return $this->Senha; }    
 
     // -- Atributos Telefone ----------------
     public function setTelefone($Tf)
@@ -67,18 +72,18 @@ class clssaudex
     {
         try 
         {
-           
             // criar o comando
-            $sql = "insert into usuarios (cod,Nome,Email,Telefone,cpf,cep,nasc,genero) values (:cod, :Nome, :Email, :Telefone, :cpf, :cep, :nasc, :genero)";
+            $sql = "insert into usuarios (cod,Nome,Senha,Email,Telefone,cpf,cep,nasc,genero) values (:cod, :Nome, :Senha, :Email, :Telefone, :cpf, :cep, :nasc, :genero)";
 
             // prepara o comando e associa os paramentros 
             $Comando=$this->conn->prepare($sql);
             $Comando->bindParam(':cod', $this->cod);
             $Comando->bindParam(':Nome', $this->Nome);
+            $Comando->bindParam(':Senha', $this->Senha); // senha em texto puro (NÃO RECOMENDADO)
             $Comando->bindParam(':Email', $this->Email);
             $Comando->bindParam(':Telefone', $this->Telefone);
-            $Comando->bindParam(':cep', $this->cep);
             $Comando->bindParam(':cpf', $this->cpf);
+            $Comando->bindParam(':cep', $this->cep);
             $Comando->bindParam(':nasc', $this->nasc);
             $Comando->bindParam(':genero', $this->genero);
 
@@ -126,9 +131,10 @@ class clssaudex
     {
         try 
         {
-            $Comando = $this->conn->prepare("update usuarios set cod=:cod,Nome=:Nome,Email=:Email,Telefone=:Telefone,cpf=:cpf,cep=:cep,nasc=:nasc,genero=:genero where cod = :cod ");
+            $Comando = $this->conn->prepare("update usuarios set cod=:cod,Nome=:Nome,Senha=:Senha,Email=:Email,Telefone=:Telefone,cpf=:cpf,cep=:cep,nasc=:nasc,genero=:genero where cod = :cod ");
             $Comando->bindParam(':cod', $this->cod);
             $Comando->bindParam(':Nome', $this->Nome);
+            $Comando->bindParam(':Senha', $this->Senha);
             $Comando->bindParam(':Email', $this->Email);
             $Comando->bindParam(':Telefone', $this->Telefone);
             $Comando->bindParam(':cep', $this->cep);
@@ -158,17 +164,17 @@ class clssaudex
         {
             if ($this->cod == '' && $this->Nome == '')
             {
-                $Matriz = $this->conn->prepare("select cod, Nome, Email, Telefone, cpf, cep, nasc, genero from usuarios");
+                $Matriz = $this->conn->prepare("select cod, Nome, Senha, Email, Telefone, cpf, cep, nasc, genero from usuarios");
             }
             elseif ($this->cod != '')
             {
-                $Matriz = $this->conn->prepare("select cod, Nome, Email, Telefone, cpf, cep, nasc, genero from usuarios where cod = :cod");
+                $Matriz = $this->conn->prepare("select cod, Nome, Senha, Email, Telefone, cpf, cep, nasc, genero from usuarios where cod = :cod");
                 $Matriz->bindParam(':cod', $this->cod); 
             }
             elseif ($this->Nome != '')
             {
                 $NomeFiltro = '%' . $this->Nome . '%';
-                $Matriz = $this->conn->prepare("select cod, Nome, Email, Telefone, cpf, cep, nasc, genero from usuarios where Nome like '%". $NomeFiltro ."%' ");
+                $Matriz = $this->conn->prepare("select cod, Nome, Senha, Email, Telefone, cpf, cep, nasc, genero from usuarios where Nome like '%". $NomeFiltro ."%' ");
             }
 
             // executo o comando sql
@@ -187,4 +193,34 @@ class clssaudex
 
         echo $RetornoJSON;
     }
+
+        public function Login($Email, $Senha) 
+{
+    try {
+        $sql = "SELECT cod, Nome, Email, Senha FROM usuarios WHERE Email = :Email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':Email', $Email);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($Senha === $usuario['Senha']) {
+                unset($usuario['Senha']); // Para não retornar a senha
+                return json_encode([
+                    "status" => "sucesso",
+                    "msg" => "Login efetuado!",
+                    "usuario" => $usuario
+                ]);
+            } else {
+                return json_encode(["status" => "erro", "msg" => "Senha incorreta"]);
+            }
+        } else {
+            return json_encode(["status" => "erro", "msg" => "Email não encontrado"]);
+        }
+    } catch (PDOException $erro) {
+        return json_encode(["status" => "erro", "msg" => $erro->getMessage()]);
+    }
+}
+
 }

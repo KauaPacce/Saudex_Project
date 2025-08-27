@@ -32,6 +32,15 @@
 
 			<div class="row">
 				<div class="col-25">
+					<label for="Senha">Senha</label>
+				</div>
+				<div class="col-75">
+					<input type="password" id="Senha" name="Senha" placeholder="Crie sua senha!">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-25">
 					<label for="Telefone">Telefone</label>
 				</div>
 				<div class="col-75">
@@ -100,6 +109,7 @@
         $('#cpf').mask('000.000.000-00');
 		$('#Telefone').mask('(00) 00000-0000');
 		$('#cep').mask('00000-000');
+		$('#nasc').mask('00/00/0000');
     });
 </script>
 </body>

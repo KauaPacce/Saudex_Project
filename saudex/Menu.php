@@ -16,7 +16,7 @@
         <a href="Medicina.php" class="btn btn-dark me-2">Medicina</a>
         <a href="Ultimas-noticias.php" class="btn btn-secondary me-2">Últimas Notícias</a>
         <a href="formUsuarios.php" class="btn btn-success me-2">Cadastrar</a>
-        <a href="entrar.html" class="btn btn-primary">Entrar</a>
+        <a href="formLogin.php" class="btn btn-primary">Entrar</a>
       </div>
     </div>
   </nav>

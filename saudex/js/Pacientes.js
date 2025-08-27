@@ -93,6 +93,8 @@ function Pesquisar()
         }
     })
 
+    
+
     // 3 parte: receber dados vindo php e mostrar
     .done(function(dadosPHP){
 
@@ -103,11 +105,12 @@ function Pesquisar()
         var Tabela = '';
         Tabela += "<table border=1>";
 
-        Tabela += "<tr> <th>cod</th> <th>Nome</th> <th>Email</th> <th>Telefone</th> <th>cpf</th> <th>cep</th> <th>nasc</th> <th>genero</th> </tr>";
+        Tabela += "<tr> <th>cod</th> <th>Nome</th> <th>Senha</th> <th>Email</th> <th>Telefone</th> <th>cpf</th> <th>cep</th> <th>nasc</th> <th>genero</th> </tr>";
             for(i = 0; i < usuarios.length; i++) {
                 Tabela += "<tr>";
                     Tabela += "<td>" + usuarios[i].cod       + "</td>";
                     Tabela += "<td>" + usuarios[i].Nome      + "</td>";
+                    Tabela += "<td>" + usuarios[i].Senha     + "</td>";
                     Tabela += "<td>" + usuarios[i].Email     + "</td>";
                     Tabela += "<td>" + usuarios[i].Telefone  + "</td>";
                     Tabela += "<td>" + usuarios[i].cpf       + "</td>";

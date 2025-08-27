@@ -4,8 +4,9 @@ use saudex;
 create table usuarios(
     cod int auto_increment,
     Nome varchar(50),
-    cpf varchar(15),
+    Senha varchar(20),
     Email char (50),
+    cpf varchar(15),
     Telefone varchar(15),
     cep char (9),
     nasc date,
