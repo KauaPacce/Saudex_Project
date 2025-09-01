@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
 <body>
 <div id="geral">
   	<div class="container">
-		<form id="cadastro" action="" method="get">
+		<form id="cadastro" action="" method="POST">
 			<div class="row">
 				<div class="col-25">
 					<label for="cod">Codigo</label>
@@ -23,10 +23,10 @@
 
 			<div class="row">
 				<div class="col-25">
-					<label for="Nome">Nome</label>
+					<label for="Nome">Nome Completo</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="Nome" name="Nome" placeholder="Digite o Nome...">
+					<input type="text" id="Nome" name="Nome" placeholder="Digite o Nome!" required>
 				</div>
 			</div>
 
@@ -35,7 +35,7 @@
 					<label for="Senha">Senha</label>
 				</div>
 				<div class="col-75">
-					<input type="password" id="Senha" name="Senha" placeholder="Crie sua senha!">
+					<input type="password" id="Senha" name="Senha" placeholder="Crie sua senha!" required>
 				</div>
 			</div>
 
@@ -44,7 +44,7 @@
 					<label for="Email">Email</label>
 				</div>
 				<div class="col-75">
-					<input type="email" id="Email" name="Email" placeholder="seu@email.com">
+					<input type="email" id="Email" name="Email" placeholder="seu@email.com" required>
 				</div>
 			</div>
 
@@ -53,7 +53,7 @@
 					<label for="Telefone">Telefone</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="Telefone" name="Telefone" placeholder="(00) 00000-0000">
+					<input type="text" id="Telefone" name="Telefone" placeholder="(00) 00000-0000" required>
 				</div>
 
 			</div>
@@ -62,7 +62,7 @@
 					<label for="cpf">Cpf</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00">
+					<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
 				</div>
 			</div>
 
@@ -71,7 +71,7 @@
 					<label for="cep">Cep</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="cep" name="cep" placeholder="00000-000">
+					<input type="text" id="cep" name="cep" placeholder="00000-000" required>
 				</div>
 			</div>
 
@@ -80,7 +80,7 @@
 					<label for="nasc">Nascimento</label>
 				</div>
 				<div class="col-75">
-					<input type="date" name="nasc" id="nasc">
+					<input type="date" name="nasc" id="nasc" max="<?php echo date('Y-m-d'); ?>" required>
 				</div>
 			</div>
 
@@ -89,9 +89,9 @@
 					<label for="genero">Genero</label>
 				</div>
 				<div class="col-75">
-					<input type="radio" name="genero" value="H">Homem
-					<input type="radio" name="genero" value="M">Mulher
-					<input type="radio" name="genero" value="N">Não-Binario
+					<input type="radio" name="genero" value="Masculino">Homem
+					<input type="radio" name="genero" value="Feminino">Mulher
+					<input type="radio" name="genero" value="Outro">Outro
 				</div>
 			</div>
 
@@ -125,7 +125,6 @@
         $('#cpf').mask('000.000.000-00');
 		$('#Telefone').mask('(00) 00000-0000');
 		$('#cep').mask('00000-000');
-		$('#nasc').mask('00/00/0000');
     });
 </script>
 </body>

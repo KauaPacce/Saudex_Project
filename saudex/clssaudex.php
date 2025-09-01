@@ -75,11 +75,11 @@ class clssaudex
             // criar o comando
             $sql = "insert into usuarios (cod,Nome,Senha,Email,Telefone,cpf,cep,nasc,genero) values (:cod, :Nome, :Senha, :Email, :Telefone, :cpf, :cep, :nasc, :genero)";
 
-            // prepara o comando e associa os paramentros 
+            
             $Comando=$this->conn->prepare($sql);
             $Comando->bindParam(':cod', $this->cod);
             $Comando->bindParam(':Nome', $this->Nome);
-            $Comando->bindParam(':Senha', $this->Senha); // senha em texto puro (NÃO RECOMENDADO)
+            $Comando->bindParam(':Senha', $this->Senha); 
             $Comando->bindParam(':Email', $this->Email);
             $Comando->bindParam(':Telefone', $this->Telefone);
             $Comando->bindParam(':cpf', $this->cpf);
@@ -177,13 +177,13 @@ class clssaudex
                 $Matriz = $this->conn->prepare("select cod, Nome, Senha, Email, Telefone, cpf, cep, nasc, genero from usuarios where Nome like '%". $NomeFiltro ."%' ");
             }
 
-            // executo o comando sql
+            // executar
             $Matriz->execute();
 
-            // transforma o resultado em um array
+            // transformar em array
             $usuarios = $Matriz->fetchAll(); 
 
-            // converte no padrao json para enviar
+            // converter
             $RetornoJSON = json_encode($usuarios);
         } 
         catch (Exception $erro) 
@@ -206,7 +206,7 @@ class clssaudex
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             
             if ($Senha === $usuario['Senha']) {
-                unset($usuario['Senha']); // Para não retornar a senha
+                unset($usuario['Senha']); // isso aqui é pra n retornar a senha
                 return json_encode([
                     "status" => "sucesso",
                     "msg" => "Login efetuado!",

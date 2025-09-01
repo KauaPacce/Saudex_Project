@@ -1,15 +1,31 @@
 create DATABASE saudex;
 use saudex;
 
-create table usuarios(
-    cod int auto_increment,
-    Nome varchar(50),
-    Senha varchar(20),
-    Email char (50),
-    cpf varchar(15),
-    Telefone varchar(15),
-    cep char (9),
-    nasc date,
-    genero char (1),
-    primary key (cod)
+CREATE TABLE usuarios(
+    cod INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR (50) NOT NULL,
+    Senha VARCHAR (25) NOT NULL,
+    Email VARCHAR (50) NOT NULL,
+    cpf VARCHAR (15) NOT NULL,
+    Telefone VARCHAR (15),
+    cep VARCHAR (9),
+    nasc DATE NOT NULL,
+    genero ENUM ('Masculino','Feminino','Outro')
+);
+
+CREATE TABLE adm (
+    codAdm INT PRIMARY KEY,
+    criadoEm TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (codAdm) REFERENCES usuarios(cod)
+);
+
+CREATE TABLE posts (
+    codPost INT AUTO_INCREMENT PRIMARY KEY,
+    codUsuario INT NOT NULL,
+    legenda TEXT,
+    urlMidia VARCHAR(255) NOT NULL,
+    tipoMidia ENUM('imagem', 'video') DEFAULT 'imagem',
+    criadoEm DATETIME DEFAULT CURRENT_TIMESTAMP,
+    atualizadoEm DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (codUsuario) REFERENCES usuarios(cod)
 );

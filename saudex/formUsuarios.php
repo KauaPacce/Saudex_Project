@@ -1,116 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="css/cadastro.css">
 </head>
-
 <body>
 <div id="geral">
   	<div class="container">
-		<form id="cadastro" action="" method="get">
+		<form id="cadastro" action="contrPacientes.php" method="POST" onsubmit="return validarFormulario();">
 			<div class="row">
-				<div class="col-25">
-					<label for="Nome">Nome</label>
-				</div>
-				<div class="col-75">
-					<input type="text" id="Nome" name="Nome" placeholder="Digite o Nome...">
+				<label for="Nome">Nome Completo</label>
+				<input type="text" id="Nome" name="Nome" placeholder="Digite o Nome!" required>
+			</div>
+
+			<div class="row">
+				<label for="Email">Email</label>
+				<input type="email" id="Email" name="Email" placeholder="seu@email.com" required>
+			</div>
+
+			<div class="row">
+				<label for="Senha">Senha</label>
+				<input type="password" id="Senha" name="Senha" placeholder="Crie sua senha!" required>
+			</div>
+
+			<div class="row">
+				<label for="Telefone">Telefone</label>
+				<input type="text" id="Telefone" name="Telefone" placeholder="(00) 00000-0000" required>
+			</div>
+
+			<div class="row">
+				<label for="cpf">Cpf</label>
+				<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+			</div>
+
+			<div class="row">
+				<label for="cep">Cep</label>
+				<input type="text" id="cep" name="cep" placeholder="00000-000" required>
+			</div>
+
+			<div class="row">
+				<label for="nasc">Nascimento</label>
+				<input type="date" name="nasc" id="nasc" max="<?php echo date('Y-m-d'); ?>" required>
+			</div>
+
+			<div class="row">
+				<label>Genero</label>
+				<div class="row-radio">
+					<input type="radio" name="genero" value="Masculino" required>Masculino
+					<input type="radio" name="genero" value="Feminino" required>Feminino
+					<input type="radio" name="genero" value="Outro" required>Outro
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-25">
-					<label for="Email">Email</label>
-				</div>
-				<div class="col-75">
-					<input type="email" id="Email" name="Email" placeholder="seu@email.com">
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-25">
-					<label for="Senha">Senha</label>
-				</div>
-				<div class="col-75">
-					<input type="password" id="Senha" name="Senha" placeholder="Crie sua senha!">
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-25">
-					<label for="Telefone">Telefone</label>
-				</div>
-				<div class="col-75">
-					<input type="text" id="Telefone" name="Telefone" placeholder="(00) 00000-0000">
-				</div>
-
-			</div>
-
-			<div class="row">
-				<div class="col-25">
-					<label for="cpf">Cpf</label>
-				</div>
-				<div class="col-75">
-					<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00">
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-25">
-					<label for="cep">Cep</label>
-				</div>
-				<div class="col-75">
-					<input type="text" id="cep" name="cep" placeholder="00000-000">
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-25">
-					<label for="nasc">Nascimento</label>
-				</div>
-				<div class="col-75">
-					<input type="date" name="nasc" id="nasc">
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-25">
-					<label for="genero">Genero</label>
-				</div>
-				<div class="col-75">
-					<input type="radio" name="genero" value="H">Homem
-					<input type="radio" name="genero" value="M">Mulher
-					<input type="radio" name="genero" value="N">Não-Binario
-				</div>
-			</div>
-
-			<br>
-			<div class="row">
-				<input type="button" id="btnEnviar"    value="Enviar"    onclick="Cadastrar();">
+				<button type="submit" id="btnEnviar" value="Enviar">Criar Conta</button>
 			</div>
 		</form>
   	</div>
-
-	<div id="resposta"> 
-		<!-- dentro desta div fica o retorno -->
-	</div>
-</div> 
+</div>
 
 	<script src="js/Pacientes.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 <script>
-	//===MASCARA PARA O FORMULARIO =================================
-    $(document).ready(function(){ 
-        $('#cpf').mask('000.000.000-00');
+
+// Máscaras para os campos
+$(document).ready(function(){ 
+		$('#cpf').mask('000.000.000-00');
 		$('#Telefone').mask('(00) 00000-0000');
 		$('#cep').mask('00000-000');
-		$('#nasc').mask('00/00/0000');
-    });
+});
+
+// Validar formulário
+function validarFormulario() {
+    let email = document.getElementById("Email").value;
+    let senha = document.getElementById("Senha").value;
+
+    if (!email.includes("@")) {
+        alert("Digite um email válido!");
+        return false;
+    }
+
+    if (senha.length < 6) {
+        alert("A senha deve ter no mínimo 6 caracteres!");
+        return false;
+    }
+
+    return true;
+}
 </script>
 </body>
 </html>

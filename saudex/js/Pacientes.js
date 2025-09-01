@@ -146,5 +146,3 @@ function Grafico()
 {
 document.write('<form action="grf.php"><input type="submit" value="Gráfico"></form>');  
 }
-
-

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,8 +16,14 @@
       <div class="ms-auto">
         <a href="Medicina.php" class="btn btn-dark me-2">Medicina</a>
         <a href="Ultimas-noticias.php" class="btn btn-secondary me-2">Últimas Notícias</a>
-        <a href="formUsuarios.php" class="btn btn-success me-2">Cadastrar</a>
-        <a href="formLogin.php" class="btn btn-primary">Entrar</a>
+        <?php if (isset($_SESSION['usuario'])): ?>
+          <a href="perfil.php" class="btn btn-outline-primary me-2" title="Perfil">
+            <img src="img/iconperfil.png" alt="Perfil" style="width:32px; height:32px;">
+          </a>
+        <?php else: ?>
+          <a href="formUsuarios.php" class="btn btn-success me-2">Cadastrar</a>
+          <a href="formLogin.php" class="btn btn-primary">Entrar</a>
+        <?php endif; ?>
       </div>
     </div>
   </nav>

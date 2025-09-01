@@ -4,36 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <title>Login - Saúdex</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
-
 <body>
  <div id="geral">
     <div class="container">
         <form id="login" action="contrLogin.php" method="post">
             <div class="row">
-                <div class="25">
-                    <label for="Email">Email</label> 
-                </div>
-                <div class="75">
-                    <input type="text" id="Email" name="Email" placeholder="Digite o seu Email.">
-                </div>
+                <label for="Email">Email</label> 
+                <input type="text" id="Email" name="Email" placeholder="Digite o seu Email.">
             </div>
-
             <div class="row">
-                <div class="25">
-                    <label for="Senha">Senha</label> 
-                </div>
-                <div class="75">
-                    <input type="password" id="Senha" name="Senha" placeholder="Digite a sua Senha.">
-                </div>
+                <label for="Senha">Senha</label> 
+                <input type="password" id="Senha" name="Senha" placeholder="Digite a sua Senha.">
             </div>
-<br>
             <div class="row">
-                <div class="75">
-                    <button type="submit">Entrar</button>
-                </div>
+                <button type="submit">Entrar</button>
             </div>
         </form>
     </div>
