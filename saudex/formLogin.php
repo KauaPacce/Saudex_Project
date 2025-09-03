@@ -22,6 +22,9 @@
             <div class="row">
                 <button type="submit">Entrar</button>
             </div>
+            <div class="row">
+                Não possui uma conta? <a href="formUsuarios.php">Cadastre-se</a>
+            </div>
         </form>
     </div>
  </div> 

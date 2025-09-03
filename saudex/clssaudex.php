@@ -205,7 +205,7 @@ class clssaudex
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            if ($Senha === $usuario['Senha']) {
+            if (password_verify($Senha, $usuario['Senha'])) {
                 unset($usuario['Senha']); // isso aqui é pra n retornar a senha
                 return json_encode([
                     "status" => "sucesso",

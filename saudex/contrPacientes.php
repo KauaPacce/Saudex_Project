@@ -1,25 +1,26 @@
 <?php
 
 // identificando arq. onde esta a classe e instanciando a classe
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include "clssaudex.php";
 $usuarios = new clssaudex();
 
 //-- Recebendo dados do formulario
-$cod        = filter_input(INPUT_GET,"cod");
-$Nome       = filter_input(INPUT_GET,"Nome");
-$Senha      = filter_input(INPUT_GET,"Senha");
-$Email      = filter_input(INPUT_GET,"Email");
-$Telefone   = filter_input(INPUT_GET,"Telefone");
-$cep        = filter_input(INPUT_GET,"cep");
-$cpf        = filter_input(INPUT_GET,"cpf");
-$nasc       = filter_input(INPUT_GET,"nasc");
-$genero     = filter_input(INPUT_GET,"genero");
-//$Mensalidade= filter_input(INPUT_GET,"Nome",FILTER_VALIDATE_FLOAT);
+$cod        = filter_input(INPUT_POST, "cod");
+$Nome       = filter_input(INPUT_POST, "Nome");
+$Senha      = filter_input(INPUT_POST, "Senha");
+$Email      = filter_input(INPUT_POST, "Email");
+$Telefone   = filter_input(INPUT_POST, "Telefone");
+$cep        = filter_input(INPUT_POST, "cep");
+$cpf        = filter_input(INPUT_POST, "cpf");
+$nasc       = filter_input(INPUT_POST, "nasc");
+$genero     = filter_input(INPUT_POST, "genero");
+
 
 //-- Enviando para dentro da classe nos atributos
 $usuarios->setcod($cod);
 $usuarios->setNome($Nome);
-$usuarios->setSenha($Senha);
+$usuarios->setSenha(password_hash($Senha, PASSWORD_DEFAULT)); // Criptografar a senha
 $usuarios->setEmail($Email);
 $usuarios->setTelefone($Telefone);
 $usuarios->setcep($cep);
@@ -29,7 +30,7 @@ $usuarios->setgenero($genero);
 
 
 //-- identificando qual ação executar 
-$Acao = $_GET['acao'];
+$Acao = $_POST['acao'];
 
 switch ($Acao) 
 {
@@ -48,3 +49,5 @@ switch ($Acao)
     default:
         echo 'acao invalida';      
 }
+}
+?>

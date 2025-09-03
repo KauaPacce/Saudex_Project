@@ -87,3 +87,9 @@ button[type="submit"]:hover {
         max-width: 95vw;
     }
 }
+
+.login-link {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.9em;
+}

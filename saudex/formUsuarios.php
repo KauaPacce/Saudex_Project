@@ -10,7 +10,8 @@
 <body>
 <div id="geral">
   	<div class="container">
-		<form id="cadastro" action="contrPacientes.php" method="POST" onsubmit="return validarFormulario();">
+		<form id="cadastro" action="" method="POST" onsubmit="return validarFormulario();">
+		  <input type="hidden" name="Acao" value="Cadastrar">
 			<div class="row">
 				<label for="Nome">Nome Completo</label>
 				<input type="text" id="Nome" name="Nome" placeholder="Digite o Nome!" required>
@@ -58,6 +59,10 @@
 			<div class="row">
 				<button type="submit" id="btnEnviar" value="Enviar">Criar Conta</button>
 			</div>
+
+			<div class="login-link"> <!-- precisa ser estilizado -->
+				Já possui uma conta? <a href="formLogin.php">Entrar</a>
+			</div>
 		</form>
   	</div>
 </div>
@@ -79,8 +84,9 @@ $(document).ready(function(){
 function validarFormulario() {
     let email = document.getElementById("Email").value;
     let senha = document.getElementById("Senha").value;
+	let nome = document.getElementById("Nome").value;
 
-    if (!email.includes("@")) {
+    if (!email.includes("@") || !email.includes(".")) {
         alert("Digite um email válido!");
         return false;
     }
@@ -89,6 +95,11 @@ function validarFormulario() {
         alert("A senha deve ter no mínimo 6 caracteres!");
         return false;
     }
+
+	if (nome.length < 3) {
+		alert("O nome deve ter no mínimo 3 caracteres!");
+		return false;
+	}
 
     return true;
 }
