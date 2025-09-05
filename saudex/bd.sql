@@ -4,7 +4,7 @@ use saudex;
 CREATE TABLE usuarios(
     cod INT AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR (50) NOT NULL,
-    Senha VARCHAR (25) NOT NULL,
+    Senha VARCHAR (255) NOT NULL,
     Email VARCHAR (50) NOT NULL,
     cpf VARCHAR (15) NOT NULL,
     Telefone VARCHAR (15),

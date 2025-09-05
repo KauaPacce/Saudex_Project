@@ -11,7 +11,7 @@
 <body>
 <div id="geral">
   	<div class="container">
-		<form id="cadastro" action="" method="POST">
+		<form id="cadastro" action="contrPacientes.php" method="POST">
 			<div class="row">
 				<div class="col-25">
 					<label for="cod">Codigo</label>
@@ -35,7 +35,7 @@
 					<label for="Senha">Senha</label>
 				</div>
 				<div class="col-75">
-					<input type="password" id="Senha" name="Senha" placeholder="Crie sua senha!" required>
+					<input type="password" id="Senha" name="Senha" placeholder="Digite a senha!" required>
 				</div>
 			</div>
 
@@ -94,8 +94,7 @@
 					<input type="radio" name="genero" value="Outro">Outro
 				</div>
 			</div>
-
-			<br><br>
+			<br>
 			<div class="row">
 				<input type="button" id="btnEnviar"    value="Enviar"    onclick="Cadastrar();">
 				<input type="button" id="btnApagar"    value="Excluir"   onclick="Excluir();">
@@ -105,7 +104,6 @@
 				<input type="button" id="btnGraf_JS"   value="Graf_JS"   onclick="Grafico();">
 				<a href="grf.php"><input type="button" id="Graf_Direto" value="Graf_Direto"></a>
 			</div>
-			<br> Consulta Geral / Codigo / Nome 
 		</form>
   	</div>
 

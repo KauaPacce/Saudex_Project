@@ -10,7 +10,7 @@
 <body>
  <div id="geral">
     <div class="container">
-        <form id="login" action="contrLogin.php" method="post">
+        <form id="login" action="contrLogin.php" method="POST">
             <div class="row">
                 <label for="Email">Email</label> 
                 <input type="text" id="Email" name="Email" placeholder="Digite o seu Email.">
@@ -22,7 +22,7 @@
             <div class="row">
                 <button type="submit">Entrar</button>
             </div>
-            <div class="row">
+            <div class="login-link">
                 Não possui uma conta? <a href="formUsuarios.php">Cadastre-se</a>
             </div>
         </form>

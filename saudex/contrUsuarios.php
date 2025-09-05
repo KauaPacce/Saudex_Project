@@ -6,7 +6,6 @@ include "clssaudex.php";
 $usuarios = new clssaudex();
 
 //-- Recebendo dados do formulario
-$cod        = filter_input(INPUT_POST, "cod");
 $Nome       = filter_input(INPUT_POST, "Nome");
 $Senha      = filter_input(INPUT_POST, "Senha");
 $Email      = filter_input(INPUT_POST, "Email");
@@ -19,7 +18,6 @@ $Acao       = filter_input(INPUT_POST, 'acao');
 
 
 //-- Enviando para dentro da classe nos atributos
-$usuarios->setcod($cod);
 $usuarios->setNome($Nome);
 $usuarios->setSenha(password_hash($Senha, PASSWORD_DEFAULT)); // Criptografar a senha
 $usuarios->setEmail($Email);
@@ -28,6 +26,7 @@ $usuarios->setcep($cep);
 $usuarios->setcpf($cpf);
 $usuarios->setnasc($nasc);
 $usuarios->setgenero($genero);
+
 
 
 //-- identificando qual ação executar 

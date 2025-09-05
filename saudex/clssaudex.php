@@ -222,5 +222,4 @@ class clssaudex
         return json_encode(["status" => "erro", "msg" => $erro->getMessage()]);
     }
 }
-
 }

@@ -10,8 +10,8 @@
 <body>
 <div id="geral">
   	<div class="container">
-		<form id="cadastro" action="" method="POST" onsubmit="return validarFormulario();">
-		  <input type="hidden" name="Acao" value="Cadastrar">
+		<form id="cadastro" action="contrUsuarios.php" method="POST" onsubmit="return validarFormulario();">
+		  <input type="hidden" name="acao" value="Cadastrar">
 			<div class="row">
 				<label for="Nome">Nome Completo</label>
 				<input type="text" id="Nome" name="Nome" placeholder="Digite o Nome!" required>
@@ -103,6 +103,37 @@ function validarFormulario() {
 
     return true;
 }
+
+//Concluir cadastro via AJAX
+$(document).ready(function() {
+    $('#cadastro').on('submit', function(e) {
+        e.preventDefault();
+        
+        if (validarFormulario()) {
+            var formData = $(this).serialize();
+            
+            $.ajax({
+                type: 'POST',
+                url: 'contrUsuarios.php',
+                data: formData,
+                success: function(response) {
+                    if (response.includes("sucesso")) {
+                        alert('Cadastro realizado com sucesso! Redirecionando para login...');
+                        setTimeout(function() {
+                            window.location.href = 'formLogin.php';
+                        }, 2000);
+                    } else {
+                        alert('Erro no cadastro: ' + response);
+                    }
+                },
+                error: function() {
+                    alert('Erro ao processar a requisição');
+                }
+            });
+        }
+    });
+});
+
 </script>
 </body>
 </html>
